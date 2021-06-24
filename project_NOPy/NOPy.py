@@ -35,7 +35,7 @@ def number_nop(nopy_list):
     plt.pie(x, labels=labels, autopct='%1.2f%%', wedgeprops={'edgecolor': 'black'})
     plt.title('The percentage distribution people who have experienced NOPs.')
     # plt.savefig('percentage_distribution_people.png')
-    # plt.show()
+    plt.show()
 
 
 number_nop(nopy_list)
@@ -68,4 +68,43 @@ def convert(nopy_list):
     return lst
 
 
+def count():
+    counts = dict()
+    for word in convert(nopy_list):
+        if word in counts:
+            counts[word] += 1
+        else:
+            counts[word] = 1
+    return counts
 
+
+def description_statistics():
+    temp = 0
+    zaczerwienienie = 0
+    drgawki = 0
+    wymioty = 0
+    omdlenie = 0
+    for i in convert(nopy_list):
+        if i == 'temp.' or i == 'temperatura' or i == 'gorączka':
+            temp += 1
+        elif i == 'zaczerwienienie':
+            zaczerwienienie += 1
+        elif i == 'drgawki':
+            drgawki += 1
+        elif i == 'wymioty':
+            wymioty += 1
+        elif i == 'omdlenie' or i == 'utrata':
+            omdlenie += 1
+    print(f'Fever = {temp}\nReddening = {zaczerwienienie}\nSeizures = {drgawki}'
+          f'\nVomiting = {wymioty} \nSwoon = {omdlenie}')
+    symptoms = ['Fever', 'Reddening', 'Seizures', 'Vomiting', 'Swoon']
+    symptoms_d = [temp, zaczerwienienie, drgawki, wymioty, omdlenie]
+    plt.bar(symptoms, symptoms_d)
+    plt.title("Number of symptoms NOP's")
+    plt.xlabel('SYMPTOMS')
+    plt.ylabel('NUMBER OF CASES')
+    # plt.savefig('number_of_symptoms.png')
+    plt.show()
+
+
+description_statistics()
